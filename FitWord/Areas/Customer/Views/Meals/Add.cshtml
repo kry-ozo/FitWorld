@@ -1,0 +1,52 @@
+﻿@using FitWorld.Models.Models;
+@using Microsoft.AspNetCore.Identity;
+@model Meal;
+@{
+    ViewData["Title"] = "Add Meal";
+}
+
+
+
+
+<section class="form-plan">
+    <h1 class="t-primary">@ViewData["Title"]</h1>
+    <form method="POST" asp-controller="Meals" asp-action="Add" novalidate enctype="multipart/form-data">
+        <div class="form-floating mb-3">
+            <input asp-for="mealName" class="form-control input-text t-primary" aria-required="true" placeholder="Meal Name" />
+            <label asp-for="mealName" class="form-label t-primary">Meal Name</label>
+            <span asp-validation-for="mealName" class="text-danger"></span>
+        </div>
+        <div class="form-floating mb-3">
+            <textarea class="form-control input-text t-primary" style="height: 100px" asp-for="mealDescription" placeholder="Plan Description"></textarea>
+            <label asp-for="mealDescription" class="t-primary">Meal Description</label>
+            <span asp-validation-for="mealDescription" class="text-danger"></span>
+        </div>
+        <div class="form-floating mb-3">
+            <input type="number" class="form-control input-text t-primary" asp-for="mealProtein">
+            <label asp-for="mealProtein" class="form-label t-primary">Proteins</label>
+            <span asp-validation-for="mealProtein" class="text-danger"></span>
+        </div>
+        <div class="form-floating mb-3">
+            <input type="number" class="form-control input-text t-primary" asp-for="mealCarbs">
+            <label asp-for="mealCarbs" class="form-label t-primary">Carbs</label>
+            <span asp-validation-for="mealCarbs" class="text-danger"></span>
+        </div>
+        <div class="form-floating mb-3">
+            <input type="number" class="form-control input-text t-primary" asp-for="mealFat">
+            <label asp-for="mealFat" class="form-label t-primary">Fats</label>
+            <span asp-validation-for="mealFat" class="text-danger"></span>
+        </div>
+        <div class=" mb-3">
+            <input type="file" class="form-control input-text t-primary d-none" asp-for="pdfMeal" name="pdfMeal">
+            <label asp-for="pdfMeal" class="form-label t-primary custom-file-upload ">Pdf file of your meal</label>
+            <span asp-validation-for="pdfMeal" class="text-danger"></span>
+        </div>
+        <button type="submit" class="btn button-primary">Add Meal</button>
+    </form>
+</section>
+
+@section Scripts {
+    @{
+        <partial name="_ValidationScriptsPartial" />
+    }
+    }

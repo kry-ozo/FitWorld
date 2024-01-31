@@ -1,0 +1,45 @@
+﻿@page
+@model RegisterModel
+@{
+    ViewData["Title"] = "Register";
+}
+<div class="row">
+    <div class="register">
+        <form id="registerForm" asp-route-returnUrl="@Model.ReturnUrl" method="post" class="container-md">
+            <div class="div-input">
+                <h2 class=" t-primary pb-3 login-header my-5">Create a new account</h2>
+                <hr />
+                <div asp-validation-summary="ModelOnly" class="text-danger" role="alert"></div>
+            </div>
+            <div class="form-floating mb-4 div-input">
+                <input asp-for="Input.NickName" class="form-control input-text t-primary" autocomplete="username" aria-required="true" placeholder="UserName" />
+                <label asp-for="Input.NickName" class="t-primary">Nick</label>
+                <span asp-validation-for="Input.NickName" class="text-danger"></span>
+            </div>
+            <div class="form-floating mb-4 div-input">
+                <input asp-for="Input.Email" class="form-control input-text t-primary" autocomplete="username" aria-required="true" placeholder="name@example.com" />
+                <label asp-for="Input.Email" class="t-primary">Email</label>
+                <span asp-validation-for="Input.Email" class="text-danger"></span>
+            </div>
+            <div class="form-floating mb-4 div-input">
+                <input asp-for="Input.Password" class="form-control input-text t-primary" autocomplete="new-password" aria-required="true" placeholder="password" />
+                <label asp-for="Input.Password" class="t-primary">Password</label>
+                <span asp-validation-for="Input.Password" class="text-danger"></span>
+            </div>
+            <div class="form-floating mb-4 div-input">
+                <input asp-for="Input.ConfirmPassword" class="form-control input-text t-primary" autocomplete="new-password" aria-required="true" placeholder="password" />
+                <label asp-for="Input.ConfirmPassword" class="t-primary">Confirm Password</label>
+                <span asp-validation-for="Input.ConfirmPassword" class="text-danger"></span>
+            </div>
+            <div class="form-floating mb-4 div-input">
+                <button id="registerSubmit" type="submit" class=" button-primary btn btn-lg">Register</button>
+            </div>
+            
+        </form>
+    </div>
+   
+</div>
+
+@section Scripts {
+    <partial name="_ValidationScriptsPartial" />
+}

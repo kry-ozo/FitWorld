@@ -1,0 +1,61 @@
+﻿@using FitWorld.Models.Models;
+@using Microsoft.AspNetCore.Identity;
+@inject UserManager<ApplicationUser> UserManager;
+@{
+    @model Plan;
+    var userId = UserManager.GetUserId(User);
+    var user = await UserManager.FindByIdAsync(Model.PlanOwnerId);
+
+    string planLevelName = "";
+    switch (Model.planLevel)
+    {
+        case 0:
+            planLevelName = "Beginner";
+            break;
+        case 1:
+            planLevelName = "Mid";
+            break;
+        case 2:
+            planLevelName = "Advanced";
+            break;
+
+    }
+}
+@{
+    ViewData["Title"] = "Plan";
+}
+
+<div class="show-card mt-5">
+    <h3 class="t-primary author text-center">Author: @user.NickName</h3>
+    <h2 class="t-primary header-text">@Model.planName</h2>
+    <div class="show-data row bg-dark t-primary text-center pb-3 justify-content-center">
+        <h4 class="col-12 text-center t-primary p-3">Plan Summary</h4>
+       <div class="col-6">
+           <p>Plan Level:</p>
+       </div>
+       <div class="col-6">
+            <p>@planLevelName</p>
+       </div>
+        <div class="col-6">
+            <p>Plan Days:</p>
+        </div>
+        <div class="col-6 ">
+            <p>@Model.planDays</p>
+        </div>
+        <a href="@Url.Action("DownloadPdf", "Plans", new {planId = Model.planId})" class="btn button-primary  mt-3 col-12 dwn-btn w-75 ">Download Plan</a>
+        
+        @if (userId == Model.PlanOwnerId)
+        {
+            <a class="btn button-primary  mt-3 col-12 dwn-btn w-75" asp-route-id="@Model.planId" asp-action="Edit">Edit</a>
+            <form class="col-12 w-75 px-3" method="POST" asp-controller="Plans" asp-action="Delete">
+                <input asp-for="planId" hidden />
+                <button type="submit" class="btn btn-primary btn-danger w-100 mt-3">Delete</button>
+                
+            </form>
+        }
+    </div>
+    <p class="show-desc t-primary text-center my-3">@Model.planDescription</p>
+        
+  
+   
+</div>

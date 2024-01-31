@@ -1,0 +1,61 @@
+﻿@*
+    For more information on enabling MVC for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
+*@
+@{
+    @model List<Plan>;
+    
+}
+
+@{
+    ViewData["Title"] = "Training Plans";
+}
+
+<section class="plans">
+    <div class="row align-items-center">
+        <h1 class="t-primary col-8">@ViewData["Title"]</h1>
+        <a class="btn col  btn btn-lg button-primary" asp-action="Add" asp-controller="Plans">Add Plan </a>
+    </div>
+
+    <div class="row justify-content-center my-2 cards">
+        @foreach (Plan plan in Model)
+        {
+            string planLevelName ="";
+            switch (plan.planLevel)
+            {
+                case 0:
+                    planLevelName = "Beginner";
+                    break;
+                case 1:
+                    planLevelName = "Mid";
+                    break;
+                case 2:
+                    planLevelName = "Advanced";
+                    break;
+
+            }
+
+            <div class="custom-card m-1 d-block">
+                <div class="custom-card-img text-center">
+                    <partial name="~/Pages/Shared/Partials/_CardPartial.cshtml">
+                </div>
+                <div class="custom-card-body">
+                    <h5 class="custom-card-title">@plan.planName</h5>
+                </div>
+                <div class="custom-card-info my-3">
+                    <ul class="list-group list-group-flush">
+                        <li class="list-group-item">Plan Days: @plan.planDays</li>
+                        <li class="list-group-item">Plan Level: @planLevelName</li>
+                        
+                    </ul>
+                    <hr class="t-primary" />
+                    <div class="card-body text-center">
+                        <a class="card-link btn button-primary" asp-controller="Plans" asp-action="ShowPlan" asp-route-id="@plan.planId">Read More</a>
+                    </div>
+                </div>
+            </div>
+        }
+
+    </div>
+    
+
+</section>

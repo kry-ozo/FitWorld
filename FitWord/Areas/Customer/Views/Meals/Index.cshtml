@@ -1,0 +1,50 @@
+﻿@*
+    For more information on enabling MVC for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
+*@
+@{
+    @model List<Meal>;
+    
+}
+@{
+    ViewData["Title"] = "Meals";
+}
+
+
+<section class="plans">
+    <div class="row align-items-center">
+        <h1 class="t-primary col-8">@ViewData["Title"]</h1>
+        <a class="btn col  btn btn-lg button-primary " asp-action="Add" asp-controller="Meals">Add Meal </a>
+    </div>
+    
+<div class="row justify-content-center my-2 cards">
+@foreach(Meal meal in Model)
+{
+    
+
+        <div class="custom-card m-1 d-block">
+            <div class="custom-card-img text-center">
+                <partial name="~/Pages/Shared/Partials/_MealPartial.cshtml">
+            </div>
+            <div class="custom-card-body">
+                <h5 class="custom-card-title">@meal.mealName</h5>
+            </div>
+            <div class="custom-card-info my-3">
+                <ul class="list-group list-group-flush">
+                    <li class="list-group-item">Proteins: @meal.mealProtein g</li>
+                    <li class="list-group-item">Fats: @meal.mealFat g</li>
+                    <li class="list-group-item">Carbs: @meal.mealCarbs g</li>
+
+                </ul>
+                <hr class="t-primary" />
+                <div class="card-body text-center">
+                    <a class="card-link btn button-primary" asp-controller="Meals" asp-action="ShowMeal" asp-route-id="@meal.mealId">Read More</a>
+                </div>
+            </div>
+        </div>
+
+
+    
+
+}
+    </div>
+</section>

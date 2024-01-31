@@ -1,0 +1,51 @@
+﻿@*
+    For more information on enabling MVC for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
+*@
+@{
+    @model Plan;
+}
+@{
+    ViewData["Title"] = "Edit Plan";
+}
+
+<section class="form-plan">
+    <h1 class="t-primary">@ViewData["Title"]</h1>
+    <form method="POST" asp-controller="Plans" asp-action="Edit" novalidate>
+        <input asp-for="planId" hidden />
+        <input asp-for="PlanOwnerId" hidden />
+        <div class="form-floating mb-3">
+            <input asp-for="planName" class="form-control input-text t-primary" aria-required="true" placeholder="Plan Name" />
+            <label asp-for="planName" class="form-label t-primary">Plan Name</label>
+            <span asp-validation-for="planName" class="text-danger"></span>
+        </div>
+        <div class="form-floating mb-3">
+            <textarea class="form-control input-text t-primary" style="height: 100px" asp-for="planDescription" placeholder="Plan Description"></textarea>
+            <label asp-for="planDescription" class="t-primary">Plan Description</label>
+            <span asp-validation-for="planDescription" class="text-danger"></span>
+        </div>
+        <div class="form-floating mb-3">
+            <input type="number" class="form-control input-text t-primary" asp-for="planDays">
+            <label asp-for="planDays" class="form-label t-primary">Plan Days</label>
+            <span asp-validation-for="planDays" class="text-danger"></span>
+        </div>
+        <div class="form-floating">
+
+            <select class="form-select form-control input-text" aria-label="Default select example" asp-for="planLevel">
+                <option selected></option>
+                <option value="0">Beginner</option>
+                <option value="1">Mid</option>
+                <option value="2">Advanced</option>
+            </select>
+            <label class="t-primary" asp-for="planLevel">Level</label>
+            <span asp-validation-for="planLevel" class="text-danger d-block p-3"></span>
+        </div>
+
+        <button type="submit" class="btn button-primary">Edit Plan</button>
+    </form>
+</section>
+
+@section Scripts {
+    @{
+        <partial name="_ValidationScriptsPartial" />
+    }
+    }

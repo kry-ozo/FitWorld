@@ -1,0 +1,55 @@
+﻿@using FitWorld.Models.Models;
+@using Microsoft.AspNetCore.Identity;
+@inject UserManager<ApplicationUser> UserManager;
+@{
+    @model Meal;
+    var userId = UserManager.GetUserId(User);
+    var user = await UserManager.FindByIdAsync(Model.MealOwnerId);
+}
+@{
+    ViewData["Title"] = "Meal";
+}
+
+<div class="show-card mt-5">
+    <h3 class="t-primary author text-center">Author: @user.NickName</h3>
+    <h2 class="t-primary header-text">@Model.mealName</h2>
+    <div class="show-data row bg-dark t-primary text-center pb-3 justify-content-center">
+        <h4 class="col-12 text-center t-primary p-3">Plan Summary</h4>
+        <div class="col-6">
+            <p>Proteins:</p>
+        </div>
+        <div class="col-6 ">
+            <p>@Model.mealProtein</p>
+        </div>
+        <div class="col-6">
+            <p>Carbs:</p>
+        </div>
+        <div class="col-6 ">
+            <p>@Model.mealCarbs</p>
+        </div>
+        <div class="col-6">
+            <p>Fats:</p>
+        </div>
+        <div class="col-6" >
+            <p>@Model.mealFat</p>
+        </div>
+        <a href="@Url.Action("DownloadPdf", "Meals", new { mealId = Model.mealId })" class="btn button-primary mt-3 col-12 dwn-btn w-75" download>Download Meal</a>
+
+
+       
+            @if (userId == Model.MealOwnerId)
+            {
+                <a class="btn button-primary  mt-3 col-12 dwn-btn w-75" asp-route-id="@Model.mealId" asp-action="Edit" asp-controller="Meals">Edit</a>
+                <form class="col-12 w-75 px-3" method="POST" asp-controller="Meals" asp-action="Delete">
+                    <input asp-for="mealId" hidden />
+                    <button type="submit" class="btn btn-primary btn-danger w-100 mt-3">Delete</button>
+                </form>
+            }
+        
+    </div>
+    <p class="show-desc t-primary text-center my-3">@Model.mealDescription</p>
+
+
+
+</div>
+

@@ -1,0 +1,47 @@
+﻿@*
+    For more information on enabling MVC for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
+*@
+@{
+    @model Meal;
+}
+<section class="form-plan">
+<h1 class="t-primary">@ViewData["Title"]</h1>
+<form method="POST" asp-controller="Meals" asp-action="Edit" novalidate>
+    <input asp-for="mealId" hidden />
+    <input asp-for="MealOwnerId" hidden />
+        <div class="form-floating mb-3">
+            <input asp-for="mealName" class="form-control input-text t-primary"  placeholder="Meal Name" />
+            <label asp-for="mealName" class="form-label t-primary">Meal Name</label>
+            <span asp-validation-for="mealName" class="text-danger"></span>
+        </div>
+        <div class="form-floating mb-3">
+            <textarea class="form-control input-text t-primary" style="height: 100px" asp-for="mealDescription" placeholder="Meal Description"></textarea>
+            <label asp-for="mealDescription" class="t-primary">Meal Description</label>
+            <span asp-validation-for="mealDescription" class="text-danger"></span>
+        </div>
+        <div class="form-floating mb-3">
+            <input type="number" class="form-control input-text t-primary" asp-for="mealProtein">
+            <label asp-for="mealProtein" class="form-label t-primary">Peoteins</label>
+            <span asp-validation-for="mealProtein" class="text-danger"></span>
+        </div>
+        <div class="form-floating mb-3">
+            <input type="number" class="form-control input-text t-primary" asp-for="mealCarbs">
+            <label asp-for="mealCarbs" class="form-label t-primary">Carbs</label>
+            <span asp-validation-for="mealCarbs" class="text-danger"></span>
+        </div>
+        <div class="form-floating mb-3">
+            <input type="number" class="form-control input-text t-primary" asp-for="mealFat">
+            <label asp-for="mealFat" class="form-label t-primary">Fats</label>
+            <span asp-validation-for="mealFat" class="text-danger"></span>
+        </div>
+        <button type="submit" class="btn button-primary">Edit Meal</button>
+
+    
+</form>
+</section>
+
+@section Scripts {
+    @{
+        <partial name="_ValidationScriptsPartial" />
+    }
+    }
